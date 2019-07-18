@@ -1,12 +1,8 @@
 // this is the code which will be injected into a given page...
+import { FILE_REGEX } from './constants'
+import { forEachEl, forFirstEl } from './utils'
 
-(function() {
-
-	const forEachEl = (elements, forEach) =>
-		Array.reverse(Array.from(elements)).forEach(forEach)
-
-	const forFirstEl = (elements, forEach) =>
-		forEach(Array.from(elements)[0])
+const handleClick = () => {
 
 	const files = document.getElementsByClassName('file-info')
 
@@ -14,7 +10,7 @@
 		const anchors = file.getElementsByTagName('A')
 
 		forEachEl(anchors, anchor => {
-			const ignore = /^dist|.snap$/.test(anchor.text)
+			const ignore = FILE_REGEX.test(anchor.text)
 
 			if (ignore) {
 				const buttons = file.parentNode.getElementsByClassName('js-reviewed-toggle')
@@ -32,4 +28,8 @@
 		})
 	})
 
+}
+
+(function() {
+	handleClick()
 })()

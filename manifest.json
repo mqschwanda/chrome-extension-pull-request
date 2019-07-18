@@ -6,7 +6,7 @@
   "homepage_url": "https://github.com/mqschwanda",
   "background": {
     "scripts": [
-      "index.js"
+      "dist/index.js"
     ],
     "persistent": true
   },
@@ -14,8 +14,8 @@
     "default_title": "Pull Request"
   },
   "permissions": [
-    "https://*/*",
-    "http://*/*",
+    "https://github.com/*",
+    "http://github.com/*",
     "tabs"
   ]
 }
