@@ -1,25 +1,39 @@
-/**
- * Gets the first element of `array`.
- *
- * @since 0.0.1
- * @category Array
- * @param {Array} array The array to query.
- * @returns {*} Returns the first element of `array`.
- * @example
- *
- * head([1, 2, 3])
- * // => 1
- *
- * head([])
- * // => undefined
- */
-export const head = (array) =>
-  (array != null && array.length)
-    ? array[0]
-    : undefined
+// @flow
+import {
+  each,
+  filter,
+  head,
+  includes,
+  isEqual,
+  toArray,
+} from 'lodash-es'
 
-export const forEachEl = (elements, forEach) =>
-		Array.from(elements).forEach(forEach)
+export {
+  toArray,
+  each,
+  head,
+  filter,
+  isEqual,
+  includes,
+}
 
-export const forFirstEl = (elements, forEach) =>
-	forEach(head(Array.from(elements)))
+export function forEachEl<T> (
+  elements: HTMLCollection<T>,
+  callback: (T) => *
+): * {
+  return each(toArray(elements), callback)
+}
+
+export function forFirstEl<T> (
+  elements: HTMLCollection<T>,
+  callback: (T) => *
+): * {
+  return each(toArray(elements), callback)
+}
+
+export function includesClassName<T> (
+  elements: HTMLCollection<T>,
+  className: string
+): HTMLCollection<T> {
+  return filter(elements, ({ className: classNames }) => includes(classNames, className))
+}

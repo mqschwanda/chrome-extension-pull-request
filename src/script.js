@@ -1,35 +1,72 @@
-// this is the code which will be injected into a given page...
-import { FILE_REGEX } from './constants'
-import { forEachEl, forFirstEl } from './utils'
+// @flow
+import {
+  BUTTON_CLASS_NAME,
+  CHECKBOX_CLASS_NAME,
+  FILE_REGEX,
+} from './constants'
+import {
+  forEachEl,
+  forFirstEl,
+  includesClassName,
+  isEqual,
+} from './utils'
+import type {
+  Anchor,
+  Anchors,
+  Buttons,
+  Checkbox,
+  Checkboxes,
+  Element,
+  Elements,
+} from './types'
 
-const handleClick = () => {
+type Props = {|
+  regex: RegExp,
+  reviewed: boolean,
+|}
 
-	const files = document.getElementsByClassName('file-info')
+type ToggleReviewed = (Props) => void
 
-	forEachEl(files, file => {
-		const anchors = file.getElementsByTagName('A')
+const toggleReviewed: ToggleReviewed = ({
+  regex,
+  reviewed,
+}: Props) => {
+  const files: Elements = document.getElementsByClassName('file-info')
 
-		forEachEl(anchors, anchor => {
-			const ignore = FILE_REGEX.test(anchor.text)
+  forEachEl(files, file => {
+    const { parentElement }: Element = file
+    if (!parentElement) return
 
-			if (ignore) {
-				const buttons = file.parentNode.getElementsByClassName('js-reviewed-toggle')
+    const anchors: Anchors = file.getElementsByTagName('a')
 
-				forFirstEl(buttons, button => {
-					const checkboxs = button.getElementsByClassName('js-reviewed-checkbox')
+    forEachEl(anchors, anchor => {
+      const { text }: Anchor = anchor
+      const match: boolean = regex.test(text)
 
-					forFirstEl(checkboxs, checkbox => {
-						if (checkbox.checked !== true) {
-							button.click()
-						}
-					})
-				})
-			}
-		})
-	})
+      if (match) {
+        const buttons: Buttons = parentElement.getElementsByTagName('button')
+        const reviewedButtons: Buttons = includesClassName(buttons, BUTTON_CLASS_NAME)
 
+        forFirstEl(reviewedButtons, button => {
+          const checkboxes: Checkboxes = button.getElementsByTagName('input')
+          const reviewedCheckboxes: Checkboxes = includesClassName(checkboxes, CHECKBOX_CLASS_NAME)
+
+          forFirstEl(reviewedCheckboxes, checkbox => {
+            const { checked }: Checkbox = checkbox
+            if (!isEqual(checked, reviewed)) {
+              button.click()
+              checkbox.checked = reviewed
+            }
+          })
+        })
+      }
+    })
+  })
 }
 
-(function() {
-	handleClick()
+(function () {
+  toggleReviewed({
+    regex: FILE_REGEX,
+    reviewed: true,
+  })
 })()

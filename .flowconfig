@@ -1,0 +1,12 @@
+[include]
+
+[ignore]
+.*/dist/.*
+.*/config/.*
+.*/assets/.*
+
+[libs]
+config/flow.config.js
+
+[options]
+suppress_type=$FlowFixMe
