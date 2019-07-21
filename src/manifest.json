@@ -6,11 +6,21 @@
   "homepage_url": "https://github.com/mqschwanda",
   "background": {
     "scripts": [
-      "dist/index.js",
-      "dist/script.js"
+      "./index.js"
     ],
     "persistent": true
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "http://github.com/*"
+      ],
+      "js": [
+        "./script.js"
+      ]
+    }
+  ],
   "browser_action": {
     "default_title": "Pull Request"
   },

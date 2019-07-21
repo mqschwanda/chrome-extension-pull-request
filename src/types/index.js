@@ -71,7 +71,9 @@ export type Elements = HTMLCollection<Element>
 
 export type Anchor = HTMLAnchorElement
 export type Anchors = HTMLCollection<Anchor>
-export type Button = HTMLButtonElement
-export type Buttons = HTMLCollection<Button>
+export type Label = HTMLLabelElement
+export type Labels = HTMLCollection<Label>
 export type Checkbox = HTMLInputElement
 export type Checkboxes = HTMLCollection<Checkbox>
+
+export type Tab = chrome$Tab

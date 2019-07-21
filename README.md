@@ -9,14 +9,14 @@ More features are coming.
 
 ```bash
 # install dependencies and create a fresh build
-yarn setup
+yarn setup # `yarn nuke-repo && yarn && yarn build && yarn --silent random-quote`
 ```
 
 ### Build
 
 ```bash
 # build `dist/*` using rollup
-yarn build # `rollup --config config/rollup.config.js`
+yarn build # `yarn nuke-build && rollup --config config/rollup.config.js && copy-build-files`
 ```
 
 ### Nuke

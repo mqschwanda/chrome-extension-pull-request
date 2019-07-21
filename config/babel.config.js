@@ -1,12 +1,23 @@
 
+const presets = [
+  ['@babel/env', {
+    targets: {
+      chrome: 33,
+    },
+  }],
+  '@babel/preset-flow',
+]
+
+const plugins = [
+  ['lodash', {
+    id: ['async', 'lodash-bound'],
+  }],
+]
+
 const babel = {
   include: 'node_modules/**',
-  plugins: [
-    ['lodash', { id: ['async', 'lodash-bound'] }],
-  ],
-  presets: [
-    ['@babel/env', { targets: { node: 6 } }],
-  ],
+  plugins,
+  presets,
 }
 
 export default babel

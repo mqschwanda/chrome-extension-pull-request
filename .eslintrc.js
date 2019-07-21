@@ -1,3 +1,1 @@
-var config = require('./config/eslint.config.js')
-
-module.exports = config
+module.exports = require('./config/eslint.config.js')

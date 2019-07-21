@@ -6,7 +6,7 @@
 .*/assets/.*
 
 [libs]
-config/flow.config.js
+node_modules/flow-interfaces-chrome/interfaces/
 
 [options]
 suppress_type=$FlowFixMe
